@@ -27,6 +27,10 @@ Route::get('/siswa/scanqr', function () {
     return Inertia::render('Siswa/ScanQr');
 })->middleware(['auth', 'verified'])->name('scan.qr');
 
+Route::get('/siswa/riwayat', function () {
+    return Inertia::render('Siswa/Riwayat');
+})->middleware(['auth', 'verified'])->name('siswa.riwayat');
+
 
 // bagian Jurusan
 Route::get('/jurusan/dashboardjurusan', function () {
