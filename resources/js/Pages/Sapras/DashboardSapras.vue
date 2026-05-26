@@ -1,5 +1,5 @@
 <script setup>
-import SaprasLayout from '@/Layouts/SaprasLayout.vue';
+import SaprasLayout from '@/Layouts/SaprasLayout/SaprasLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 

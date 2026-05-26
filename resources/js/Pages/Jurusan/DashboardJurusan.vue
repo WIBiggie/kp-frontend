@@ -1,5 +1,5 @@
 <script setup>
-import JurusanLayout from '@/Layouts/JurusanLayout.vue';
+import JurusanLayout from '@/Layouts/JurusanLayout/JurusanLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 
