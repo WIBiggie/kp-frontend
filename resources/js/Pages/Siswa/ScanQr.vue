@@ -48,10 +48,18 @@ const handleAction = (type) => {
     <AuthenticatedLayout>
         <div class="p-6 sm:p-8 max-w-[1400px] mx-auto space-y-8 text-gray-900">
 
-            <div>
-                <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-800">Pindai Kode QR</h1>
-                <p class="text-sm text-slate-500 mt-1">Arahkan kamera ke kode QR kategori alat yang tertempel di rak penyimpanan.</p>
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-800">Pindai Kode QR</h1>
+                    <p class="text-sm text-slate-500 mt-1">Arahkan kamera ke kode QR kategori alat yang tertempel di rak penyimpanan.</p>
+                </div>
+                <div class="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center border-2 border-slate-300 shadow-sm cursor-pointer hover:bg-slate-300 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-slate-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                </div>
             </div>
+
 
             <div class="max-w-xl mx-auto bg-white border border-gray-100 rounded-3xl p-6 shadow-sm text-center space-y-6">
                 <div class="relative aspect-square w-full max-w-[360px] mx-auto bg-slate-900 rounded-2xl flex flex-col items-center justify-center text-white overflow-hidden border-4 border-slate-200 shadow-inner">

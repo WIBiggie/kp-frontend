@@ -14,38 +14,65 @@ Route::get('/', function () {
     ]);
 });
 
-// bagian Siswa
-Route::get('/siswa/dashboard', function () {
-    return Inertia::render('Siswa/Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// ==================== BAGIAN SISWA ====================
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/siswa/dashboard', function () {
+        return Inertia::render('Siswa/Dashboard');
+    })->name('dashboard');
 
-Route::get('/siswa/alattersedia', function () {
-    return Inertia::render('Siswa/AlatTersedia');
-})->middleware(['auth', 'verified'])->name('alat.tersedia');
+    Route::get('/siswa/alattersedia', function () {
+        return Inertia::render('Siswa/AlatTersedia');
+    })->name('alat.tersedia');
 
-Route::get('/siswa/scanqr', function () {
-    return Inertia::render('Siswa/ScanQr');
-})->middleware(['auth', 'verified'])->name('scan.qr');
+    Route::get('/siswa/scanqr', function () {
+        return Inertia::render('Siswa/ScanQr');
+    })->name('scan.qr');
 
-Route::get('/siswa/riwayat', function () {
-    return Inertia::render('Siswa/Riwayat');
-})->middleware(['auth', 'verified'])->name('siswa.riwayat');
+    Route::get('/siswa/riwayat', function () {
+        return Inertia::render('Siswa/Riwayat');
+    })->name('siswa.riwayat');
 
+    Route::get('/siswa/pengaturan', function () {
+        return Inertia::render('Siswa/Pengaturan'); // Sesuaikan nama letak file komponen Anda
+    })->name('pengaturan.edit');
 
-// bagian Jurusan
+    // NOTE: Route manual /siswa/profil dihapus agar tidak bentrok dengan ProfileController
+});
+
+// ==================== BAGIAN JURUSAN ====================
 Route::get('/jurusan/dashboardjurusan', function () {
     return Inertia::render('Jurusan/DashboardJurusan');
 })->middleware(['auth', 'verified'])->name('dashboardjurusan');
 
-
-// bagian Sarana Prasarana
+// ==================== BAGIAN SAPRAS ====================
 Route::get('/sapras/dashboardsapras', function () {
     return Inertia::render('Sapras/DashboardSapras');
 })->middleware(['auth', 'verified'])->name('dashboardsapras');
 
+// =========================================================================
+// PROFIL GLOBAL (DIBAGI PER ROLE)
+// =========================================================================
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    // 1. Profil Khusus Siswa
+    Route::prefix('siswa')->group(function () {
+        Route::get('/profil', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::post('/profil', [ProfileController::class, 'update'])->name('profile.update');
+    });
+
+    // 2. Profil Khusus Jurusan
+    Route::prefix('jurusan')->group(function () {
+        Route::get('/profil', [ProfileController::class, 'editJurusan'])->name('jurusan.profile.edit');
+        Route::post('/profil', [ProfileController::class, 'updateJurusan'])->name('jurusan.profile.update');
+    });
+
+    // 3. Profil Khusus Sapras
+    Route::prefix('sapras')->group(function () {
+        Route::get('/profil', [ProfileController::class, 'editSapras'])->name('sapras.profile.edit');
+        Route::post('/profil', [ProfileController::class, 'updateSapras'])->name('sapras.profile.update');
+    });
+
+    // Route delete akun (jika masih dipakai global)
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

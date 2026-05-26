@@ -1,9 +1,9 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, useForm, usePage, router } from '@inertiajs/vue3'; // Tambahkan 'router' di sini
-import { ref } from 'vue';
+import { Head, useForm, usePage } from '@inertiajs/vue3';
+import { ref, onMounted } from 'vue';
 
-// Mengambil data user dengan aman
+// Mengambil data user dengan aman (jika auth kosong, pakai objek kosong {})
 const pageProps = usePage().props;
 const loggedInUser = pageProps.auth?.user || {};
 
@@ -53,8 +53,7 @@ const submitProfile = () => {
     form.post(route('profile.update'), {
         preserveScroll: true,
         onSuccess: () => {
-            // Mengarahkan pengguna kembali ke halaman dashboard siswa saat berhasil
-            router.get(route('dashboard'));
+            alert('Profil berhasil diperbarui!');
         },
         onError: (errors) => {
             console.error('Gagal menyimpan:', errors);
@@ -69,9 +68,16 @@ const submitProfile = () => {
     <AuthenticatedLayout>
         <div class="p-6 sm:p-8 max-w-[1000px] mx-auto space-y-8 text-gray-900">
 
-            <div>
-                <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-800">Profil Saya</h1>
-                <p class="text-sm text-slate-500 mt-1">Gaya tren 2026 • Kelola identitas dan foto akun Anda.</p>
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-800">Profil Saya</h1>
+                    <p class="text-sm text-slate-500 mt-1">Gaya tren 2026 • Kelola identitas dan foto akun Anda.</p>
+                </div>
+                <div class="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center border-2 border-slate-300 shadow-sm cursor-pointer hover:bg-slate-300 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-slate-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
@@ -138,12 +144,8 @@ const submitProfile = () => {
                         </div>
 
                         <div class="flex justify-end pt-4 border-t border-slate-100">
-                            <button
-                                type="submit"
-                                :disabled="form.processing"
-                                class="bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold text-sm px-6 py-3 rounded-2xl shadow-md active:scale-95 transition-all disabled:opacity-50 disabled:scale-100"
-                            >
-                                {{ form.processing ? 'Menyimpan...' : 'Simpan Perubahan' }}
+                            <button type="submit" class="bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold text-sm px-6 py-3 rounded-2xl shadow-md active:scale-95 transition-all">
+                                Simpan Perubahan
                             </button>
                         </div>
                     </form>

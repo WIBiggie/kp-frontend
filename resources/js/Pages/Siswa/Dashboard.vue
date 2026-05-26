@@ -106,7 +106,7 @@ const tools = ref([
                                 <th class="py-3.5 px-4 w-16 text-center">No</th>
                                 <th class="py-3.5 px-6">Nama Alat</th>
                                 <th class="py-3.5 px-6">Kategori</th>
-                                <th class="py-3.5 px-6">Status</th>
+                                <th class="py-3.5 px-6 text-center">Status</th>
                                 <th class="py-3.5 px-6 text-center w-28">Stok</th>
                             </tr>
                         </thead>
@@ -120,7 +120,7 @@ const tools = ref([
                                 <td class="py-3.5 px-4 text-center text-slate-500 font-normal">{{ index + 1 }}</td>
                                 <td class="py-3.5 px-6 font-semibold">{{ tool.name }}</td>
                                 <td class="py-3.5 px-6 text-slate-600">{{ tool.category }}</td>
-                                <td class="py-3.5 px-6">
+                                <td class="py-3.5 px-6 text-center">
                                     <span
                                         :class="{
                                             'text-green-600 bg-green-50 px-2.5 py-1 rounded-full text-xs font-bold': tool.status === 'Tersedia',
